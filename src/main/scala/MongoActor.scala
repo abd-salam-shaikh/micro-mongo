@@ -1,4 +1,5 @@
 import akka.actor.Actor
+import mongo.MongoCollectionFactory
 import play.api.libs.json.JsObject
 
 /**
@@ -6,9 +7,12 @@ import play.api.libs.json.JsObject
   */
 class MongoActor extends Actor {
 
+  private val coll = new MongoCollectionFactory().makeCollection("faq")
+
   override def receive = {
-    case JsObject(doc) =>
-      println(doc)
+    case doc@JsObject(_) =>
+      println(s"inserting to mongodb: $doc")
+      coll.insert(doc)
     case _ =>
       println(s"unexpected msg")
   }
