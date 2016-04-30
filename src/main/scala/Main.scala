@@ -6,7 +6,7 @@ import akka.actor.{ActorSystem, Props}
 object Main extends App {
   val system = ActorSystem("MicroMongoSystem")
 
-  system.actorOf(Props[MongoActor], "mongoactor")
+  system.actorOf(Props[MongoActor], "mongo-actor")
 
   println("Mongo Actor started, waiting for messages..")
 
